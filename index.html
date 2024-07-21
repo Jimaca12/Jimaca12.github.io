@@ -1,5 +1,113 @@
 <script>
-    let a = prompt("Ingrese un Numero");
-    let b = prompt("Ingrese otro Numero");
-    alert("La suma es: "+a+b);
+    /*sistema de ingreso de notas universitarias*/
+    function leer(cantidad,cantidadEstudiantes){//Apertura Funcion Que si devuelve resultado #1
+        for (let d = 0; d < cantidadEstudiantes; d++) {
+        matriz[d] = new Array(cantidad);
+        }
+        for(let x=0; x<cantidadEstudiantes; x++){//bucle for #1
+            acumNotas=0;
+                for (let i=0;i<cantidad;i++){//apertura bucle for #2
+                do{
+                matriz[x][i] = parseFloat(prompt(`Ingrese la nota del estudiante ${x+1} en el parcial ${i+1}: `));
+                ingresado = matriz[x][i];
+                if(matriz[x][i]>20||matriz[x][i]<1||isNaN(matriz[x][i])){//apertura if else #1
+                    alert("la nota esta fuera de los Limites");
+                }else{
+                    alert("La nota esta correcta");
+                }//cierre if else #1
+                }while(matriz[x][i]>20||matriz[x][i]<1||isNaN(matriz[x][i]));
+                acumNotas += ingresado;
+                }//cierre bucle for #2
+                promedio=acumNotas/cantidad;
+                notasFinales.push(promedio);
+        }//cierre bucle for #1
+        return notasFinales,matriz;
+    }//Cierre Funcion Que si devuelve resultado #1
+    function mostrarpromedio (notasFinales){//apertura funcion q no devuelve resultado
+            for(let p=0;p<cantidad;p++){
+            alert(`La nota promedio del estudiante ${p+1} es: ${notasFinales[p]}`);
+            }
+    }//cierre funcion q no devuelve resultado
+    function mostrarNotas({matriz},cantidadEstudiantes,cantidad){
+        let x=0,i=0,a=0;
+        for(x=0;x<cantidadEstudiantes;x++){
+            alert(`Notas del estudiante ${x+1}`);
+            for(i=0;i<cantidad;i++){
+                alert(`parcial ${i+1}:  ${matriz[x][i]}`)
+            }
+        }
+    }
+    function condicional(respuesta){
+        if (respuesta<5){//apertura if else #2
+            a=true;
+        }else{
+            a = false;
+        }//cierre if else #2
+        return a;
+    }
+    function cambiarNotas({matriz},cantidadEstudiantes,cantidad,eleccion){
+        var a,b,c,notanueva;
+        do{
+        a = parseInt(prompt("ingrese el numero de estudiante a cambiar la Nota"));
+        }while(a<1||a>cantidadEstudiantes||isNaN(a));
+        a = a-1;
+        do{
+            b = parseInt(prompt("Ingrese el Parcial a modificar"));
+        }while(b<1||b>cantidad||isNaN(b));
+        b = b-1;
+        do{
+            notanueva = parseInt(prompt("Ingrese la nota Nueva"));
+        }while(notanueva<1||notanueva>20||isNaN(notanueva));
+            matriz[a][b] = notanueva;
+        }
+    function todo (){//apertura funcion que no devuelve ningun resultado
+    while(a == true){
+        function elegir(){//apertura funcion q si devuelve resultado#2
+            do{
+                respuesta = parseInt(prompt("1.-Ingreso de notas\n2.-Mostrar promedios\n3.-Mostrar Notas\n4.-Cambiar nota\n5.- Salir"));
+            }while(respuesta<1||respuesta>5||isNaN(respuesta));
+            return respuesta;
+        }//cierre funcion q si devuelve resultado #2
+        elegir();
+        switch(respuesta){
+            case 1 :
+                do{
+                    cantidadEstudiantes = parseInt(prompt("Ingrese la cantidad de estudiantes a registrar(1-1000)"));
+                    if(cantidadEstudiantes<1||cantidadEstudiantes>1000||isNaN(cantidadEstudiantes)){//apertura if solo #1
+                        alert("ERROR, INTENTE DE NUEVO");
+                    }//cierre if solo #1
+                }while(cantidadEstudiantes<1||cantidadEstudiantes>1000||isNaN(cantidadEstudiantes));
+                /////////////////////////////////////////////////////////////////////////////////////////////
+                do{
+                    cantidad = parseInt(prompt("Ingrese la cantidad de parciales(1-8)"));
+                    if(cantidad<1||cantidad>8||isNaN(cantidad)){//apertura if solo #2
+                        alert("ERROR, INTENTE DE NUEVO");
+                    }//cierre if solo #2
+                }while(cantidad<1||cantidad>8||isNaN(cantidad));
+                leer(cantidadEstudiantes,cantidad);
+                break;
+            case 2 :
+                mostrarpromedio(notasFinales);
+                break;
+            case 3:
+                mostrarNotas({matriz},cantidadEstudiantes,cantidad);
+                break;
+            case 4:
+                eleccion = "S";
+                while(eleccion=="s"||eleccion=="S"){
+                cambiarNotas({matriz},cantidadEstudiantes,cantidad,eleccion);
+                eleccion = prompt("Desea cambiar otra nota? (S/N)");
+                }
+                break;
+            default:
+                condicional(respuesta);
+                break;
+            }
+      }
+    }//cierre funcion que no devuelve ningun resultado
+    var a = true;//variable para mantener el bucle en uso o no
+    var respuesta,ingresado,cantidad=0,cantidadEstudiantes=0,promedio,eleccion;
+    var notasFinales=[];
+    var matriz =  new Array(cantidadEstudiantes);
+    todo();
 </script>
